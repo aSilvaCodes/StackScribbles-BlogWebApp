@@ -1,0 +1,36 @@
+<%- include("partials/header.ejs") %>
+
+<div class="container mw-md-custom-thirty" >
+    <form action="/compose" method="POST">
+      <div class="form-group">
+        <label for="postTitle">Title</label>
+        <input type="text" class="form-control" name="postTitle" placeholder="Enter Title" autofocus required>
+      </div>
+  
+      <div class="form-group mt-3">
+        <label for="postContent">Post</label>
+        <textarea class="form-control" name="postContent" rows="4" autofocus required></textarea>
+      </div>
+  
+      <button type="submit" class="btn btn-outline-light hotpink mt-3">Publish</button>
+    </form>
+  </div>
+
+<% if (locals.blogPostArray) { %>
+    <% for(let i = 0; i < blogPostArray.length; i++) {%>
+        <div class="container my-5 mw-md-custom-thirty">
+            <div class="p-5 bg-body-tertiary rounded-3">
+                <h1 class="text-body-emphasis"><%= blogPostArray[i].title %></h1>
+                <p class="lead"><%= blogPostArray[i].content %></p>
+                <div class="d-flex justify-content-end gap-2">
+                    <a href="/edit/<%= blogPostArray[i].id %>" class="btn btn-primary">Edit</a>
+                    <form action="/delete/<%= blogPostArray[i].id %>" method="POST" class="d-inline">
+                      <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this post?');">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    <% } %>
+<% } %>
+
+<%- include("partials/footer.ejs") %>
