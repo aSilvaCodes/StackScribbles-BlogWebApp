@@ -23,10 +23,10 @@ app.get("/contact", (req, res) => {
 
 app.post("/compose", (req,res) =>{
     const newPost = {
-            id: ++idCount,
-            title: req.body.postTitle,
-            content: req.body.postContent,
-            date: new Date()
+        id: ++idCount,
+        title: req.body.postTitle,
+        content: req.body.postContent,
+        date: new Date()
     };
     blogPosts.push(newPost);
     res.render("index.ejs", { blogPostArray: blogPosts });
